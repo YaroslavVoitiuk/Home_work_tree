@@ -7,16 +7,23 @@ public class Contacts {
     private final int NAME = 0;
     private final int SECOND_NAME = 1;
 
-    Map<String, Contact> contacts = new HashMap<>();
-    Groups groups;
+    private final Map<String, Contact> contacts = new HashMap<>();
+    private Groups groups;
 
-    public void addContact() {
+    public Map<String, Contact> getContacts() {
+        return contacts;
+    }
+
+    public Contact createContact(){
         System.out.println("Введите имя, фамилию, номер и групу через пробел:");
         String[] data = Main.scanner.nextLine().split(" ");
-        int NUMBER = 2;
-        if (!contacts.containsKey(data[NUMBER])) {
-            Contact contact = new Contact(data[NAME], data[SECOND_NAME], getGroup(data));
-            contacts.put(data[NUMBER], contact);
+        int number = 2;
+        return new Contact(data[NAME],data[SECOND_NAME],data[number],getGroup(data));
+    }
+
+    public void addContact(Contact contact) {
+        if (!contacts.containsKey(contact.getNumber())){
+            contacts.put(contact.getNumber(),contact);
         } else {
             System.out.println("Такой номер уже существует");
         }
@@ -80,7 +87,7 @@ public class Contacts {
                 if (entry.getKey().equals(input)) {
                     System.out.println("Введите новые данные для этого номера: " + entry.getKey());
                     String [] data = Main.scanner.nextLine().split(" ");
-                    Contact contact = new Contact(data[NAME],data[SECOND_NAME],getGroup(data));
+                    Contact contact = new Contact(data[NAME],data[SECOND_NAME],entry.getKey(),getGroup(data));
                     contacts.put(entry.getKey(),contact);
                 }
             }

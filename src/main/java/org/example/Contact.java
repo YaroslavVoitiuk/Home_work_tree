@@ -6,17 +6,23 @@ import java.util.Objects;
 public class Contact {
     private final String name;
     private final String secondName;
+    private String number;
     private Groups groups;
 
-    public Contact(String name, String secondName, Groups groups) {
+    public Contact(String name, String secondName, String number, Groups groups) {
         this.name = name;
         this.secondName = secondName;
+        this.number = number;
         this.groups = groups;
     }
 
     public Contact(String name, String secondName) {
         this.name = name;
         this.secondName = secondName;
+    }
+
+    public String getNumber() {
+        return number;
     }
 
     public String getName() {

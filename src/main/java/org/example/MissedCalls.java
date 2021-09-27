@@ -7,19 +7,17 @@ import java.util.TreeMap;
 
 public class MissedCalls {
 
-    Map<LocalDateTime, String> missedCalls = new TreeMap<>();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private final Map<LocalDateTime, String> missedCalls = new TreeMap<>();
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    public void addMissedCall() {
-        System.out.println("Введите номер: ");
-        String input = Main.scanner.nextLine();
-        missedCalls.put(LocalDateTime.now(), input);
+    public void addMissedCall(String number) {
+        missedCalls.put(LocalDateTime.now(), number);
     }
 
     public void showCalls() {
-        if (!Main.contact.contacts.isEmpty()) {
+        if (!Main.contact.getContacts().isEmpty()) {
             for (Map.Entry<LocalDateTime, String> entry : missedCalls.entrySet()) {
-                for (Map.Entry<String, Contact> ent : Main.contact.contacts.entrySet()) {
+                for (Map.Entry<String, Contact> ent : Main.contact.getContacts().entrySet()) {
                     String date = formatter.format(entry.getKey());
                     if (entry.getValue().equals(ent.getKey())) {
                         System.out.println("Пропущенный звонок " + date + " от" + ent.getValue());

@@ -3,8 +3,8 @@ package org.example;
 import java.util.Scanner;
 
 public class Main {
-    public static Scanner scanner = new Scanner(System.in);
-    public static Contacts contact = new Contacts();
+    protected static Scanner scanner = new Scanner(System.in);
+    protected static Contacts contact = new Contacts();
 
     public static void main(String[] args) {
         boolean isWorking = true;
@@ -24,11 +24,13 @@ public class Main {
             int choose = Integer.parseInt(scanner.nextLine());
             switch (choose) {
                 case 1:
-                    contact.addContact();
+                    contact.addContact(contact.createContact());
                     printBorder();
                     break;
                 case 2:
-                    missedCalls.addMissedCall();
+                    System.out.println("Введите номер: ");
+                    String number = Main.scanner.nextLine();
+                    missedCalls.addMissedCall(number);
                     printBorder();
                     break;
                 case 3:
